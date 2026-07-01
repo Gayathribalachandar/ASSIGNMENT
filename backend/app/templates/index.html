@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candidate Intelligence Engine</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <header class="header">
+        <h1>Candidate Intelligence Engine</h1>
+        <p>Resolve Structured &amp; Unstructured Candidate Data</p>
+    </header>
+
+    <section class="upload-section">
+
+        <!-- Resume Upload -->
+        <div class="upload-card">
+
+            <h2>Resume PDFs</h2>
+
+            <div class="drop-zone" id="resumeDropZone">
+
+                <div class="upload-icon">
+                    📄
+                </div>
+
+                <p>Drop Resume PDFs Here</p>
+
+                <span>or</span>
+
+                <label class="browse-btn">
+                    Browse Files
+                    <input
+                        id="resumeInput"
+                        type="file"
+                        accept=".pdf"
+                        multiple
+                        hidden>
+                </label>
+
+            </div>
+
+            <div class="selected-files">
+
+                <ul id="resumeFileList">
+
+                </ul>
+
+            </div>
+
+        </div>
+
+        <!-- Structured Upload -->
+
+        <div class="upload-card">
+
+            <h2>Structured Sources</h2>
+
+            <div class="drop-zone" id="structuredDropZone">
+
+                <div class="upload-icon">
+                    📊
+                </div>
+
+                <p>Drop CSV / JSON Files</p>
+
+                <span>or</span>
+
+                <label class="browse-btn">
+                    Browse Files
+                    <input
+                        id="structuredInput"
+                        type="file"
+                        accept=".csv,.json"
+                        multiple
+                        hidden>
+                </label>
+
+            </div>
+
+            <div class="selected-files">
+
+                <ul id="structuredFileList">
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <div class="button-container">
+
+        <button id="analyzeButton">
+
+            Analyze Candidate
+
+        </button>
+
+    </div>
+
+    <div id="loadingSection" class="hidden">
+
+        <div class="spinner"></div>
+
+        <p>Analyzing candidate...</p>
+
+    </div>
+
+    <section id="resultSection" class="hidden">
+
+        <!-- Trust Score -->
+
+        <div class="card">
+
+            <h2>Candidate Trust Score</h2>
+
+            <div class="score-value" id="trustScore">
+
+                --
+
+            </div>
+
+            <div class="score-label" id="trustLabel">
+
+                Awaiting Analysis
+
+            </div>
+
+            <div class="progress-bar">
+
+                <div
+                    id="progressFill"
+                    class="progress-fill">
+
+                </div>
+
+            </div>
+
+            <div class="processing-time">
+
+                <span id="processingTime"></span>
+
+            </div>
+
+        </div>
+
+        <!-- JSON Output -->
+
+        <div class="card">
+
+            <div class="json-header">
+
+                <h2>Canonical Candidate JSON</h2>
+
+                <div>
+
+                    <button id="copyJson">
+
+                        Copy
+
+                    </button>
+
+                    <button id="downloadJson">
+
+                        Download
+
+                    </button>
+
+                </div>
+
+            </div>
+
+            <pre id="jsonViewer">
+
+            </pre>
+
+        </div>
+
+        <!-- Explain -->
+
+        <details>
+
+            <summary>
+
+                Explain Trust Score
+
+            </summary>
+
+            <div class="explanation">
+
+                <pre id="explanationViewer"></pre>
+
+            </div>
+
+        </details>
+
+    </section>
+
+</div>
+
+<script src="{{ url_for('static', path='script.js') }}"></script>
+
+</body>
+</html>

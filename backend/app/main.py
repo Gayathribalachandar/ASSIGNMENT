@@ -1,30 +1,23 @@
+from pathlib import Path
+
 from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+
+from app.api.routes import router
+
+BASE_DIR = Path(__file__).resolve().parent
+
+STATIC_DIR = BASE_DIR / "static"
 
 app = FastAPI(
     title="Candidate Intelligence Engine",
-    version="1.0.0",
-    description="Canonical Candidate Profile Generator"
+    version="1.0.0"
 )
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+app.mount(
+    "/static",
+    StaticFiles(directory=str(STATIC_DIR)),
+    name="static"
 )
 
-@app.get("/")
-def home():
-    return {
-        "application": "Candidate Intelligence Engine",
-        "version": "1.0.0",
-        "status": "Running"
-    }
-
-@app.get("/health")
-def health():
-    return {
-        "status": "healthy"
-    }
+app.include_router(router)
